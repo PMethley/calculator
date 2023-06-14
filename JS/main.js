@@ -84,6 +84,30 @@ document.getElementById("clear").addEventListener("click", () => {
     unselectOperator();
 });
 
+document.getElementById("decimal").addEventListener("click", () => {
+    if(displayNumber.includes(".") === false){
+        displayElement.innerText = displayElement.innerText + ".";
+        displayNumber = displayNumber + "."
+    };
+});
+
+document.getElementById("plus-minus").addEventListener("click", () => {
+    if(displayNumber != "" && displayNumber[0] != "-"){
+        displayElement.innerText = "-" + displayElement.innerText;
+        displayNumber = "-" + displayNumber;
+    }else if(displayNumber != "" && displayNumber[0] === "-"){
+        displayElement.innerText = displayElement.innerText.substring(1);
+        displayNumber = displayNumber.substring(1);
+    };
+});
+
+document.getElementById("percentage").addEventListener("click", () => {
+    if(displayNumber != ""){
+        displayElement.innerText = displayNumber/100;
+        displayNumber = valueOne = valueTwo = currentOperator = "";
+    };
+});
+
 operatorButtonsArray.forEach((buttonElement) => {
     buttonElement.addEventListener("click", () =>{
         buttonElement.classList.add("selected-operator")
