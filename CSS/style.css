@@ -9,14 +9,16 @@ body{
 
 #calculator-canvas{
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 30px;
     border-style: solid;
     border-width: 3px;
     border-color: #505050;
 }
 
 #screen{
-    font-size: 80px;
+    font-size: 75px;
+
+
     text-align: right;
     padding: 0px 10px;
 }
@@ -28,7 +30,7 @@ body{
     width: 80px;
     height: 80px;
     margin: 5px;
-    font-size: 35px;
+    font-size: 40px;
     padding: 0px;
     text-align: center;
 }
@@ -55,8 +57,13 @@ body{
     background-color: #505050;
 }
 
-.orange{
-    background-color: #FF9500;
+.light-blue{
+    background-color: #3cdfff;
+}
+
+.selected-operator{
+    background-color: white;
+    color: #3cdfff;
 }
 
 #zero{

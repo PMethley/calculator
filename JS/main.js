@@ -5,6 +5,7 @@ let displayNumber = "0";
 let valueOne = "";
 let valueTwo = "";
 let currentOperator = "";
+let currentOperatorElement = "";
 
 function add(firstVal, secondVal){
     return(firstVal + secondVal);
@@ -38,8 +39,18 @@ function operate(firstNum, operator, secondNum){
     };
 };
 
+function unselectOperator(){
+    if (currentOperatorElement != ""){
+        currentOperatorElement.classList.remove("selected-operator")
+    };
+};
+
 numberButtonsArray.forEach((buttonElement) => {
     buttonElement.addEventListener("click", () => {
+        unselectOperator();
+        if(displayNumber.length > 8){
+            return;
+        };
         if(displayElement.innerText === "0" || displayNumber === ""){
             displayElement.innerText = buttonElement.innerText;
             displayNumber = buttonElement.innerText;
@@ -53,18 +64,28 @@ numberButtonsArray.forEach((buttonElement) => {
 document.getElementById("clear").addEventListener("click", () => {
     displayElement.innerText = "0";
     displayNumber = currentOperator = valueOne = valueTwo = "";
+    unselectOperator();
 });
 
 operatorButtonsArray.forEach((buttonElement) => {
     buttonElement.addEventListener("click", () =>{
+        buttonElement.classList.add("selected-operator")
+        if(valueOne != "" && displayNumber != ""){
+            valueOne = displayElement.innerText = operate(Number(valueOne), currentOperator, Number(displayNumber));
+            displayNumber = "";
+            currentOperator = "";
+
+        }else{
+            valueOne = displayNumber;
+            displayNumber = "";
+        }
+        currentOperatorElement = buttonElement
         currentOperator = buttonElement.innerText;
-        valueOne = displayNumber;
-        displayElement.innerText = "0";
-        displayNumber = "";
     });
 });
 
 document.getElementById("equals").addEventListener("click", () => {
+    unselectOperator();
     if(valueOne === ""){
         console.log("if")
         displayElement.innerText, displayNumber = "0";
