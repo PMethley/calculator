@@ -23,16 +23,33 @@ function divide(firstVal, secondVal){
     return(firstVal / secondVal);
 };
 
+function roundNumber(inputVal){
+    if(inputVal > 99999){
+        return(inputVal.toPrecision(5));
+    }else{
+        return(inputVal.toPrecision(8)/1);
+    };
+};
+
 function operate(firstNum, operator, secondNum){
+    let result = 0;
     switch (operator) {
         case "+":
-            return(add(firstNum, secondNum));
+            result = add(firstNum, secondNum);
+            result = roundNumber(result);
+            return(result);
         case "-":
-            return(subtract(firstNum,secondNum));
+            result = subtract(firstNum, secondNum);
+            result = roundNumber(result);
+            return(result);
         case "×":
-            return(multiply(firstNum, secondNum));
+            result = multiply(firstNum, secondNum);
+            result = roundNumber(result);
+            return(result);
         case "÷":
-            return(divide(firstNum, secondNum));
+            result = divide(firstNum, secondNum);
+            result = roundNumber(result);
+            return(result);
         default:
             console.log("No operator selected");
             break;
@@ -78,8 +95,8 @@ operatorButtonsArray.forEach((buttonElement) => {
         }else{
             valueOne = displayNumber;
             displayNumber = "";
-        }
-        currentOperatorElement = buttonElement
+        };
+        currentOperatorElement = buttonElement;
         currentOperator = buttonElement.innerText;
     });
 });
@@ -87,16 +104,12 @@ operatorButtonsArray.forEach((buttonElement) => {
 document.getElementById("equals").addEventListener("click", () => {
     unselectOperator();
     if(valueOne === ""){
-        console.log("if")
         displayElement.innerText, displayNumber = "0";
     }else if(valueOne != "" && currentOperator === ""){
-        console.log("else if 1")
         displayElement.innerText, displayNumber = valueOne;
     }else if(valueOne != "" && currentOperator != "" && displayNumber === ""){
-        console.log("else if 2")
         displayElement.innerText = displayNumber = operate(Number(valueOne), currentOperator, Number(valueOne));
     }else{
-        console.log("else")
         valueTwo = displayNumber;
         displayElement.innerText = displayNumber = operate(Number(valueOne), currentOperator, Number(valueTwo));
     };
